@@ -1,0 +1,11 @@
+skills:
+  - name: prometheus-scraper
+    path: /root/.skills/prometheus-scraper
+    targets:
+      - http://node-exporter:9100/metrics
+    metrics:
+      - node_uname_info
+      - node_load5
+      - node_filesystem_avail_bytes
+      - node_memory_MemFree_bytes
+      - node_disk_io_time_weighted_seconds_total

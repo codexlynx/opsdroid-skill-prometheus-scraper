@@ -1,0 +1,20 @@
+version: "3.5"
+
+services:
+  node-exporter:
+    image: prom/node-exporter:latest
+    privileged: true
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+
+  opsdroid:
+    image: opsdroid/opsdroid:v0.16.0
+    volumes:
+      - ./configuration.yaml:/root/.config/opsdroid/configuration.yaml
+      - ./:/root/.skills/prometheus-scraper
